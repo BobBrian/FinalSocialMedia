@@ -18,12 +18,30 @@ function Feed() {
     const [posts, setPosts] = useState ([]); // stores the actual posts
 
     useEffect(() =>{
-        db.collection("posts")
-
-    }, [])
+        db.collection("posts").orderBy("timestamp","desc").onSnapshot(snapshot=>(
+            setPosts(snapshot.docs.map(doc =>(
+                {
+                    // This is a Real Time Listner to firebase, that pushes a message , displays it on 
+                    // Cloud Firestore and maps it to the post constant     
+                    id: doc.id,
+                    data: doc.data()
+                }
+            )))
+        ))
+     }, []);
 
     const sendPost = (e)=>{
         e.preventDefault(); // Prevents the Page form Refreshing when ever a Post is Made
+        // This represents what is actually going to show up once typed
+        db.collection('posts').add({
+            name: 'Test Brain',
+            description: 'See if this works',
+            message: input,
+            photoUrl: '',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+
+        setInput("");
 
     };
 
@@ -33,7 +51,9 @@ function Feed() {
                 <div className="feed_input">
                     <CreateIcon/>
                     <form>
-                        <input  type="text"/> {/* Ensure that what we type in is directly added to the database */}
+                        <input value={input} onChange={
+                            e=> setInput(e.target.value)
+                        }type="text"/> {/* Ensure that what we type in is directly added to the database */}
                         <button type="submit" onClick={sendPost}>Send</button>
                     </form>
                 </div>
@@ -57,13 +77,6 @@ function Feed() {
                 /> // This will Render out all our Post which will help when we create Them and View them 
             ))}
 
-
-            <Posts
-                name ="Test"
-                description ="This is to show the code works"
-                message ="I've Made this code 3 times now"
-            
-            />
         </div>
     )
 }

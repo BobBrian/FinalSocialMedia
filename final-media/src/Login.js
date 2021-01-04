@@ -3,8 +3,8 @@ import "./Login.css";
 
 function Login() {
     return (
-        <div>
-            
+        <div className="login">
+            <h1>You are Viewing the Login Page</h1>
         </div>
     )
 }
