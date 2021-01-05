@@ -15,7 +15,7 @@ function Posts({name, description, message, photoUrl}) {
     return (
         <div className="post">
         <div className="post_header">
-            <Avatar/>
+            <Avatar src={photoUrl}>{name[0]}</Avatar> 
             <div className="post_info">
                 {/* Note that these take the place of the props we have inserted */}
                 <h2>{name}</h2>

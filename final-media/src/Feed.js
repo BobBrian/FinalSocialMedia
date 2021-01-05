@@ -9,13 +9,14 @@ import EventIcon from '@material-ui/icons/Event';
 import Posts from './Posts';
 import {db} from "./firebase";
 import firebase from "firebase";
+import { useSelector } from 'react-redux';
+import { selectUser } from './features/userSlice';
 
 function Feed() {
 
     const [input, setInput] = useState (""); // stores the information for the post
-
-    
     const [posts, setPosts] = useState ([]); // stores the actual posts
+    const user = useSelector(selectUser);
 
     useEffect(() =>{
         db.collection("posts").orderBy("timestamp","desc").onSnapshot(snapshot=>(
@@ -33,11 +34,11 @@ function Feed() {
     const sendPost = (e)=>{
         e.preventDefault(); // Prevents the Page form Refreshing when ever a Post is Made
         // This represents what is actually going to show up once typed
-        db.collection('posts').add({
-            name: 'Test Brain',
-            description: 'See if this works',
+        db.collection("posts").add({
+            name: user.displayname,
+            description: user.email,
             message: input,
-            photoUrl: '',
+            photoUrl: user.photoUrl || "",
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
