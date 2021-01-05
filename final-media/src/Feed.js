@@ -19,23 +19,25 @@ function Feed() {
     const user = useSelector(selectUser);
 
     useEffect(() =>{
-        db.collection("posts").orderBy("timestamp","desc").onSnapshot(snapshot=>(
-            setPosts(snapshot.docs.map(doc =>(
+            db.collection("posts")
+                .orderBy("timestamp","desc")
+                .onSnapshot((snapshot)=>(
+                setPosts(snapshot.docs.map((doc) =>(
                 {
-                    // This is a Real Time Listner to firebase, that pushes a message , displays it on 
-                    // Cloud Firestore and maps it to the post constant     
-                    id: doc.id,
-                    data: doc.data()
-                }
-            )))
-        ))
+                        // This is a Real Time Listner to firebase, that pushes a message , displays it on 
+                        // Cloud Firestore and maps it to the post constant     
+                        id: doc.id,
+                        data: doc.data(),
+                 })))
+            )
+        );
      }, []);
 
     const sendPost = (e)=>{
         e.preventDefault(); // Prevents the Page form Refreshing when ever a Post is Made
         // This represents what is actually going to show up once typed
         db.collection("posts").add({
-            name: user.displayname,
+            name: user.displayName,
             description: user.email,
             message: input,
             photoUrl: user.photoUrl || "",

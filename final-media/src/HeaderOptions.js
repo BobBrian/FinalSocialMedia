@@ -4,7 +4,7 @@ import { Avatar } from "@material-ui/core";
 import { useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice';
 
-function HeaderOptions({avatar, Icon, title,onClick}) {
+function HeaderOptions({avatar, Icon, title, onClick}) {
 
     const user = useSelector(selectUser);
 

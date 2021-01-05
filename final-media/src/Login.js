@@ -12,7 +12,7 @@ function Login() {
     const dispatch = useDispatch();
 
     const loginToApp = (e) =>{
-        e.preventDefault()
+        e.preventDefault();
 
         auth.signInWithEmailAndPassword(email,password)
         .then(userAuth => {
@@ -50,7 +50,7 @@ function Login() {
                     })
                 );
             });
-        }).catch(error => alert(error.message));
+        }).catch((error) => alert(error));
     };
     
     return (
