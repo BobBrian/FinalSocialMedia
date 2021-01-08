@@ -7,7 +7,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import SendIcon from '@material-ui/icons/Send';
 import { Avatar } from '@material-ui/core'
 
-function Posts({name, description, message, photoUrl}) {
+function Posts ({name, description, message, photoUrl}) {
+        // the Forwardref if here for the flip animation when posts are added
 
         //One thing to bear in mind is the Props for Posts
         // Becuase those are used Heavily to Add information 

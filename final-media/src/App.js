@@ -3,7 +3,7 @@ import Sidebar from './Sidebar';
 import Feed from './Feed';
 import Header from './Header';
 import './App.css';
-import Widget from './Widget';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout, selectUser } from './features/userSlice';
 import Login from './Login';
@@ -39,14 +39,12 @@ function App() {
   return (
     <div className="app">
       <Header/>
-
-
-      {!user ? (<Login/>)
+      {!user ? (<Login/>) // Defaults any no Registered Users to the Login Page.Maybe Alterative to react Router Dom
       :(
           <div className="app_body">
           <Sidebar/>
           <Feed/>
-          <Widget/>
+          
         </div>
       )}
       

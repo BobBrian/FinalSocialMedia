@@ -12,6 +12,7 @@ import firebase from "firebase";
 import { useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice';
 
+
 function Feed() {
 
     const [input, setInput] = useState (""); // stores the information for the post
@@ -67,21 +68,20 @@ function Feed() {
                     <InputOptions Icon={CalendarViewDayIcon} title="Write Artcles" color="#2FBEF6 "/>  
                 </div>
             </div>
-            {posts.map(({id , data:{name, description, message, photoUrl}}) =>(
-                //Purpose of the code is to render out any information related to post on thr screen
-                // Notice how the table where all the infomarion is stored in matches the ones for the prop names made in the Post.js file
-                <Posts
-                key={id} // This is the Unique Idenfier 
-                name={name}
-                description={description}
-                message={message}
-                photoUrl={photoUrl}
-                
-                /> // This will Render out all our Post which will help when we create Them and View them 
-            ))}
-
+                    
+                    {posts.map(({id , data:{name, description, message, photoUrl}}) =>(
+                        //Purpose of the code is to render out any information related to post on thr screen
+                        // Notice how the table where all the infomarion is stored in matches the ones for the prop names made in the Post.js file
+                        <Posts
+                        key={id} // This is the Unique Idenfier 
+                        name={name}
+                        description={description}
+                        message={message}
+                        photoUrl={photoUrl}
+                        /> // This will Render out all our Post which will help when we create Them and View them 
+                    ))}`
         </div>
-    )
+    );
 }
 
 export default Feed
